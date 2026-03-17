@@ -11,6 +11,7 @@ router.get("/servicos", async (req, res) => {
     }
 });
 
+
 router.get("/funcionarios", async (req, res) => {
     try {
         const [rows] = await db.query("SELECT * FROM funcionarios");
