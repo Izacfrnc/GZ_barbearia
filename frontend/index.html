@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbearia - Início</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="index">
+  <header>
+    <div class="container topo">
+      <h1>Sistema Barbearia</h1>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Resumo</h2>
+      <p id="status-api" class="status">Verificando conexão com backend...</p>
+    </section>
+
+    <section class="grid-resumo">
+      <div class="kpi">
+        <span>Total de clientes</span>
+        <strong id="total-clientes">0</strong>
+      </div>
+
+      <div class="kpi">
+        <span>Total de funcionários</span>
+        <strong id="total-funcionarios">0</strong>
+      </div>
+
+      <div class="kpi">
+        <span>Total de serviços</span>
+        <strong id="total-servicos">0</strong>
+      </div>
+
+      <div class="kpi">
+        <span>Total de agendamentos</span>
+        <strong id="total-agendamentos">0</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Agendamentos</h2>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Cliente</th>
+              <th>Serviço</th>
+              <th>Funcionário</th>
+            </tr>
+          </thead>
+          <tbody id="lista-agendamentos-home">
+            <tr>
+              <td colspan="6" class="mensagem-vazia">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

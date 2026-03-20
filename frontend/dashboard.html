@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbearia - Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="dashboard">
+  <header>
+    <div class="container topo">
+      <h1>Dashboard Barbearia</h1>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="card secao">
+      <h2>Clientes</h2>
+
+      <form id="form-cliente" class="form-grid">
+        <input type="hidden" id="cliente-id" />
+
+        <div>
+          <label for="cliente-nome">Nome</label>
+          <input type="text" id="cliente-nome" required />
+        </div>
+
+        <div>
+          <label for="cliente-telefone">Telefone</label>
+          <input type="text" id="cliente-telefone" required />
+        </div>
+
+        <div class="full botoes">
+          <button type="submit">Salvar cliente</button>
+          <button type="button" id="cancelar-cliente" class="perigo">Cancelar</button>
+        </div>
+      </form>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-clientes">
+            <tr>
+              <td colspan="4" class="mensagem-vazia">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card secao">
+      <h2>Funcionários</h2>
+
+      <form id="form-funcionario" class="form-grid">
+        <input type="hidden" id="funcionario-id" />
+
+        <div class="full">
+          <label for="funcionario-nome">Nome</label>
+          <input type="text" id="funcionario-nome" required />
+        </div>
+
+        <div class="full botoes">
+          <button type="submit">Salvar funcionário</button>
+          <button type="button" id="cancelar-funcionario" class="perigo">Cancelar</button>
+        </div>
+      </form>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-funcionarios">
+            <tr>
+              <td colspan="3" class="mensagem-vazia">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card secao">
+      <h2>Serviços</h2>
+
+      <form id="form-servico" class="form-grid">
+        <input type="hidden" id="servico-id" />
+
+        <div class="full">
+          <label for="servico-tipo">Tipo do serviço</label>
+          <input type="text" id="servico-tipo" required />
+        </div>
+
+        <div class="full botoes">
+          <button type="submit">Salvar serviço</button>
+          <button type="button" id="cancelar-servico" class="perigo">Cancelar</button>
+        </div>
+      </form>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Serviço</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-servicos">
+            <tr>
+              <td colspan="3" class="mensagem-vazia">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card secao">
+      <h2>Agendamentos</h2>
+
+      <form id="form-agendamento" class="form-grid">
+        <input type="hidden" id="agendamento-id" />
+
+        <div>
+          <label for="agendamento-data">Data</label>
+          <input type="date" id="agendamento-data" required />
+        </div>
+
+        <div>
+          <label for="agendamento-horario">Horário</label>
+          <input type="time" id="agendamento-horario" required />
+        </div>
+
+        <div>
+          <label for="agendamento-cliente">Cliente</label>
+          <select id="agendamento-cliente" required>
+            <option value="">Selecione</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="agendamento-servico">Serviço</label>
+          <select id="agendamento-servico" required>
+            <option value="">Selecione</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="agendamento-funcionario">Funcionário</label>
+          <select id="agendamento-funcionario" required>
+            <option value="">Selecione</option>
+          </select>
+        </div>
+
+        <div class="full botoes">
+          <button type="submit">Salvar agendamento</button>
+          <button type="button" id="verificar-disponibilidade">Ver disponibilidade</button>
+          <button type="button" id="cancelar-agendamento" class="perigo">Cancelar</button>
+        </div>
+      </form>
+
+      <div>
+        <h3>Horários ocupados</h3>
+        <ul id="lista-disponibilidade" class="lista-disponibilidade"></ul>
+      </div>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Cliente</th>
+              <th>Serviço</th>
+              <th>Funcionário</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-agendamentos">
+            <tr>
+              <td colspan="7" class="mensagem-vazia">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+<script src="js/app.js"></script>
+</body>
+</html>
+
