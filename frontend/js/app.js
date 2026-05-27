@@ -551,3 +551,9 @@ function limparListaDisponibilidade() {
     lista.innerHTML = "";
   }
 }
+
+const botao = document.getElementById("tema");
+
+botao.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+});
