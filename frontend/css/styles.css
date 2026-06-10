@@ -152,6 +152,7 @@ select,
 button {
   width: 100%;
   padding: 10px;
+  margin-bottom: 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
@@ -208,7 +209,7 @@ button.perigo {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  min-width: 100%;
 }
 
 th,
@@ -358,13 +359,12 @@ body.dark #tema {
     width: 100px;
     height: 80px;
     object-fit: contain;
-}
+  }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 15px;
-}
+  }
 
 body::before {
   content: "";

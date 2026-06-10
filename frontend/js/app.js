@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "dashboard") {
     iniciarDashboard();
   }
+
+  if (page === "cliente") {
+    iniciarCliente();
+  }
+
 });
 
 async function request(url, options = {}) {
@@ -108,7 +113,11 @@ async function carregarTudoDashboard() {
   ]);
 
   await carregarSelectsAgendamento();
-  await carregarAgendamentos();
+  const tabela = document.getElementById("lista-agendamentos");
+
+if (tabela) {
+    await carregarAgendamentos();
+}
 }
 
 /* CLIENTES */
@@ -578,3 +587,13 @@ botao.addEventListener("click", () => {
     }
 
 });
+
+if (page === "cliente") {
+  iniciarCliente();
+}
+
+async function iniciarCliente() {
+  configurarFormularioClientes();
+  configurarFormularioAgendamentos();
+  await carregarSelectsAgendamento();
+}
