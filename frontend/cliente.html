@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Cliente</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body data-page="cliente">
+
+```
+<button id="tema">🌙</button>
+
+<header>
+    <div class="container topo">
+
+        <div class="logo-area">
+            <img src="1.png" class="logo">
+            <h1>Área do Cliente</h1>
+        </div>
+
+        <nav>
+            <a href="#" id="btnSair">Sair</a>
+        </nav>
+
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="card">
+        <h2 id="boasVindas">Olá!</h2>
+        <p>Bem-vindo à área do cliente.</p>
+    </section>
+
+    <section class="card secao">
+        <h2>Meus Dados</h2>
+
+        <form id="form-cliente" class="form-grid">
+
+            
+
+            <input type="hidden" id="cliente-id">
+
+            <div>
+                <label for="cliente-nome">Nome</label>
+                <input type="text" id="cliente-nome" required>
+            </div>
+
+            <div>
+                <label for="cliente-telefone">Telefone</label>
+                <input type="text" id="cliente-telefone" required>
+            </div>
+
+            <div class="full botoes">
+                <div class="full botoes">
+    <button type="submit">Salvar meus dados</button>
+
+    <button
+        type="button"
+        id="cancelar-cliente"
+        class="perigo">
+        Cancelar
+    </button>
+</div>
+            </div>
+
+            <div class="tabela-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody id="lista-clientes">
+      <tr>
+        <td colspan="4">Carregando...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+        </form>
+    </section>
+
+    <section class="card secao">
+        <h2>Agendamento</h2>
+
+        <form id="form-agendamento" class="form-grid">
+
+            
+
+            <input type="hidden" id="agendamento-id">
+
+            <div>
+                <label for="agendamento-data">Data</label>
+                <input type="date" id="agendamento-data" required>
+            </div>
+
+            <div>
+                <label for="agendamento-horario">Horário</label>
+                <input type="time" id="agendamento-horario" required>
+            </div>
+
+            <div>
+                <label for="agendamento-cliente">Cliente</label>
+                <select id="agendamento-cliente" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="agendamento-servico">Serviço</label>
+                <select id="agendamento-servico" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="full">
+                <label for="agendamento-funcionario">Funcionário</label>
+                <select id="agendamento-funcionario" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="full botoes">
+                <button type="submit">Agendar</button>
+
+                <button type="button" id="verificar-disponibilidade">
+                    Ver disponibilidade
+                </button>
+                <button
+    type="button"
+    id="cancelar-agendamento"
+    class="perigo">
+    Cancelar
+</button>
+            </div>
+
+        </form>
+
+        <div>
+            <h3>Horários ocupados</h3>
+            <ul id="lista-disponibilidade" class="lista-disponibilidade"></ul>
+        </div>
+
+        <div class="tabela-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody id="lista-clientes">
+      <tr>
+        <td colspan="4">Carregando...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    </section>
+
+</main>
+
+<script>
+
+    const nome = localStorage.getItem("nome");
+
+    if(nome){
+        document.getElementById("boasVindas").innerText =
+            `Olá, ${nome}!`;
+    }
+
+    document.getElementById("btnSair")
+    .addEventListener("click", () => {
+
+        localStorage.removeItem("nome");
+        localStorage.removeItem("tipo");
+
+        window.location.href = "login.html";
+    });
+
+</script>
+
+<script src="js/app.js"></script>
+```
+
+</body>
+</html>

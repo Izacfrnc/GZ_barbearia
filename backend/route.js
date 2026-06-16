@@ -310,3 +310,33 @@ router.delete("/agendamentos/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, senha } = req.body;
+
+    const [usuarios] = await db.query(
+      `SELECT * FROM usuarios
+       WHERE email = ? AND senha = ?`,
+      [email, senha]
+    );
+
+    if (usuarios.length === 0) {
+      return res.status(401).json({
+        erro: "Email ou senha inválidos"
+      });
+    }
+
+    const usuario = usuarios[0];
+
+    res.json({
+      nome: usuario.nome,
+      tipo: usuario.tipo
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      erro: error.message
+    });
+  }
+});

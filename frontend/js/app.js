@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "dashboard") {
     iniciarDashboard();
   }
+
+  if (page === "cliente") {
+    iniciarCliente();
+  }
+
 });
 
 async function request(url, options = {}) {
@@ -108,7 +113,11 @@ async function carregarTudoDashboard() {
   ]);
 
   await carregarSelectsAgendamento();
-  await carregarAgendamentos();
+  const tabela = document.getElementById("lista-agendamentos");
+
+if (tabela) {
+    await carregarAgendamentos();
+}
 }
 
 /* CLIENTES */
@@ -550,4 +559,41 @@ function limparListaDisponibilidade() {
   if (lista) {
     lista.innerHTML = "";
   }
+}
+
+const botao = document.getElementById("tema");
+
+const temaSalvo = localStorage.getItem("tema");
+
+if (temaSalvo === "dark") {
+    document.body.classList.add("dark");
+    botao.textContent = "☀️";
+}
+
+botao.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+        localStorage.setItem("tema", "dark");
+        botao.textContent = "☀️";
+
+    } else {
+
+        localStorage.setItem("tema", "light");
+        botao.textContent = "🌙";
+
+    }
+
+});
+
+if (page === "cliente") {
+  iniciarCliente();
+}
+
+async function iniciarCliente() {
+  configurarFormularioClientes();
+  configurarFormularioAgendamentos();
+  await carregarSelectsAgendamento();
 }
