@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .logo img {
+        width: 180px;
+    }
+
+    .box {
+        background: #1c1c1c;
+        padding: 25px;
+        border-radius: 10px;
+        width: 320px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    h2 {
+        text-align: center;
+        color: #660000;
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+
+   button {
+    width: 150px;
+    height: 40px;
+    padding: 0;
+    background: #660000;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+
+    box-sizing: border-box; /* impede mudança por borda/padding */
+    display: block;
+    margin: 10px auto 0 auto;
+
+    flex-shrink: 0; /* evita o flex alterar tamanho (caso esteja em flex) */
+}
+
+/* evita mudança no hover */
+button:hover {
+    background: #660000; /* mantém igual */
+}
+
+    button:hover {
+        background: #880000;
+    }
+
+    .msg {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+        .container {
+            flex-direction: column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="1.png" alt="Logo">
+    </div>
+
+    <!-- LOGIN -->
+    <div class="box">
+        <h2>Login</h2>
+
+        <input type="text" id="user" placeholder="Usuário">
+        <input type="password" id="pass" placeholder="Senha">
+
+        <button onclick="login()">Entrar</button>
+
+        <div class="msg" id="msg"></div>
+    </div>
+
+</div>
+
+<script>
+function login() {
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+    const msg = document.getElementById("msg");
+
+    // MESMA LÓGICA SIMPLES QUE FUNCIONAVA
+    if (user === "admin" && pass === "1234") {
+        localStorage.setItem("logado", "true");
+        window.location.href = "dashboard.html";
+    } else {
+        msg.innerText = "Usuário ou senha incorretos!";
+        msg.style.color = "red";
+    }
+
+
+if (user === "cliente" && pass === "1234") {
+        localStorage.setItem("logado", "true");
+        window.location.href = "cliente.html";
+    } else {
+        msg.innerText = "Usuário ou senha incorretos!";
+        msg.style.color = "red";
+    }
+}
+
+
+</script>
+
+</body>
+</html>

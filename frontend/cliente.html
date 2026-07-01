@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#660000">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área do Cliente</title>
@@ -10,12 +11,10 @@
 
 <body data-page="cliente">
 
-```
 <button id="tema">🌙</button>
 
 <header>
     <div class="container topo">
-
         <div class="logo-area">
             <img src="1.png" class="logo">
             <h1>Área do Cliente</h1>
@@ -24,7 +23,6 @@
         <nav>
             <a href="#" id="btnSair">Sair</a>
         </nav>
-
     </div>
 </header>
 
@@ -40,8 +38,6 @@
 
         <form id="form-cliente" class="form-grid">
 
-            
-
             <input type="hidden" id="cliente-id">
 
             <div>
@@ -55,36 +51,34 @@
             </div>
 
             <div class="full botoes">
-                <div class="full botoes">
-    <button type="submit">Salvar meus dados</button>
+                <button type="submit">Salvar meus dados</button>
 
-    <button
-        type="button"
-        id="cancelar-cliente"
-        class="perigo">
-        Cancelar
-    </button>
-</div>
+                <button
+                    type="button"
+                    id="cancelar-cliente"
+                    class="perigo">
+                    Cancelar
+                </button>
             </div>
 
             <div class="tabela-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
 
-    <tbody id="lista-clientes">
-      <tr>
-        <td colspan="4">Carregando...</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+                    <tbody id="lista-clientes">
+                        <tr>
+                            <td colspan="4">Carregando...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </form>
     </section>
@@ -93,8 +87,6 @@
         <h2>Agendamento</h2>
 
         <form id="form-agendamento" class="form-grid">
-
-            
 
             <input type="hidden" id="agendamento-id">
 
@@ -132,15 +124,18 @@
             <div class="full botoes">
                 <button type="submit">Agendar</button>
 
-                <button type="button" id="verificar-disponibilidade">
+                <button
+                    type="button"
+                    id="verificar-disponibilidade">
                     Ver disponibilidade
                 </button>
+
                 <button
-    type="button"
-    id="cancelar-agendamento"
-    class="perigo">
-    Cancelar
-</button>
+                    type="button"
+                    id="cancelar-agendamento"
+                    class="perigo">
+                    Cancelar
+                </button>
             </div>
 
         </form>
@@ -151,50 +146,58 @@
         </div>
 
         <div class="tabela-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Cliente</th>
+                        <th>Serviço</th>
+                        <th>Funcionário</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
 
-    <tbody id="lista-clientes">
-      <tr>
-        <td colspan="4">Carregando...</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+                <tbody id="lista-agendamentos">
+                    <tr>
+                        <td colspan="7">Carregando...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </section>
 
 </main>
 
 <script>
+const nome = localStorage.getItem("nome");
 
-    const nome = localStorage.getItem("nome");
+if (nome) {
+    document.getElementById("boasVindas").innerText = `Olá, ${nome}!`;
+}
 
-    if(nome){
-        document.getElementById("boasVindas").innerText =
-            `Olá, ${nome}!`;
-    }
-
-    document.getElementById("btnSair")
-    .addEventListener("click", () => {
-
-        localStorage.removeItem("nome");
-        localStorage.removeItem("tipo");
-
-        window.location.href = "login.html";
-    });
-
+document.getElementById("btnSair").addEventListener("click", () => {
+    localStorage.removeItem("nome");
+    localStorage.removeItem("tipo");
+    window.location.href = "login.html";
+});
 </script>
 
 <script src="js/app.js"></script>
-```
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+<div class="menu-mobile">
+    <a href="index.html">🏠</a>
+    <a href="dashboard.html">📋</a>
+    <a href="cliente.html">👤</a>
+</div>
 
 </body>
 </html>

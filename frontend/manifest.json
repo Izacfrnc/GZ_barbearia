@@ -1,0 +1,9 @@
+{
+  "name": "Barbearia Senai",
+  "short_name": "Barbearia",
+  "start_url": "login.html",
+  "display": "standalone",
+  "background_color": "#660000",
+  "theme_color": "#660000",
+  "orientation": "portrait"
+}
