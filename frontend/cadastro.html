@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cadastro.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="cadastro-container">
+
+        <h1 class="cadastro-titulo">
+            💈 Barbearia SENAI
+        </h1>
+
+        <h2 class="cadastro-subtitulo">
+            Criar Conta
+        </h2>
+
+        <input class="cadastro-input"
+            type="text"
+            id="nome"
+            placeholder="Nome completo">
+
+        <input class="cadastro-input"
+            type="email"
+            id="email"
+            placeholder="Email">
+
+        <input class="cadastro-input"
+            type="text"
+            id="telefone"
+            placeholder="Telefone">
+
+        <input class="cadastro-input"
+            type="password"
+            id="senha"
+            placeholder="Senha">
+
+        <input class="cadastro-input"
+            type="password"
+            id="confirmarSenha"
+            placeholder="Confirmar senha">
+
+        <button class="cadastro-btn" onclick="cadastrar()">
+            Criar Conta
+        </button>
+
+        <p class="cadastro-link">
+            Já possui uma conta?
+            <a href="login.html">Entrar</a>
+        </p>
+
+    </div>
+
+    <script src="cadastro.js"></script>
+
+</body>
+
+</html>

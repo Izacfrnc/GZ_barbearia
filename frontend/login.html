@@ -109,36 +109,66 @@ button:hover {
 
         <button onclick="login()">Entrar</button>
 
+        <p class="cadastro-link">
+    Não tem uma conta?
+    <a href="cadastro.html">Criar conta</a>
+</p>
+
         <div class="msg" id="msg"></div>
     </div>
 
 </div>
 
 <script>
-function login() {
+
+
+async function login() {
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
     const msg = document.getElementById("msg");
 
-    // MESMA LÓGICA SIMPLES QUE FUNCIONAVA
-    if (user === "admin" && pass === "1234") {
-        localStorage.setItem("logado", "true");
-        window.location.href = "dashboard.html";
-    } else {
-        msg.innerText = "Usuário ou senha incorretos!";
-        msg.style.color = "red";
-    }
+    try {
 
+        const resposta = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: user,
+                senha: pass
+            })
+        });
 
-if (user === "cliente" && pass === "1234") {
-        localStorage.setItem("logado", "true");
-        window.location.href = "cliente.html";
-    } else {
-        msg.innerText = "Usuário ou senha incorretos!";
+        const dados = await resposta.json();
+
+        if (resposta.ok) {
+
+            localStorage.setItem("logado", "true");
+            localStorage.setItem("nome", dados.nome);
+            localStorage.setItem("tipo", dados.tipo);
+
+            if (dados.tipo === "admin") {
+                window.location.href = "dashboard.html";
+            } else {
+                window.location.href = "cliente.html";
+            }
+
+        } else {
+
+            msg.innerText = dados.erro;
+            msg.style.color = "red";
+
+        }
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        msg.innerText = "Erro ao conectar com o servidor.";
         msg.style.color = "red";
     }
 }
-
 
 </script>
 
