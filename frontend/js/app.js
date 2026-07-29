@@ -588,12 +588,16 @@ botao.addEventListener("click", () => {
 
 });
 
-if (page === "cliente") {
-  iniciarCliente();
-}
 
 async function iniciarCliente() {
-  configurarFormularioClientes();
-  configurarFormularioAgendamentos();
-  await carregarSelectsAgendamento();
+    configurarFormularioClientes();
+    configurarFormularioAgendamentos();
+    await carregarClientes();
+    await carregarSelectsAgendamento();
+
+    const tabela = document.getElementById("lista-agendamentos");
+
+    if (tabela) {
+        await carregarAgendamentos();
+    }
 }

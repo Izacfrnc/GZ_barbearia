@@ -381,3 +381,87 @@ body::before {
 
   z-index: -1;
 }
+
+.menu-mobile{
+    display:none;
+}
+
+@media(max-width:768px){
+
+    .menu-mobile{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:60px;
+        background:#660000;
+        justify-content:space-around;
+        align-items:center;
+        z-index:999;
+    }
+
+    .menu-mobile a{
+        color:white;
+        text-decoration:none;
+        font-size:24px;
+    }
+
+    body{
+        padding-bottom:80px;
+    }
+
+}
+
+.topo nav a{
+    color:#fff;
+    text-decoration:none;
+    background:#b30000;
+    padding:10px 18px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.topo nav a:hover{
+    background:#8b0000;
+}
+
+.login-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:100vh;
+    padding:0 8%;
+    gap:120px;
+}
+
+.login-esquerda{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.logo-login{
+    width:420px;
+    max-width:100%;
+    margin-bottom:25px;
+}
+
+.login-esquerda h1{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.login-esquerda p{
+    font-size:22px;
+    color:#ccc;
+}
+
+.login-direita{
+    width:420px;
+    display:flex;
+    justify-content:center;
+}
