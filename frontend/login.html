@@ -148,7 +148,7 @@ async function login() {
             localStorage.setItem("nome", dados.nome);
             localStorage.setItem("tipo", dados.tipo);
 
-            if (dados.tipo === "admin") {
+            if (dados.tipo === "adm") {
                 window.location.href = "dashboard.html";
             } else {
                 window.location.href = "cliente.html";

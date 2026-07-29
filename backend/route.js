@@ -309,7 +309,69 @@ router.delete("/agendamentos/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+/* CADASTRO DE USUÁRIO */
+
+router.post("/cadastro", async (req, res) => {
+
+  try {
+
+    const {
+      nome,
+      email,
+      telefone,
+      senha
+    } = req.body;
+
+
+    if (!nome || !email || !telefone || !senha) {
+      return res.status(400).json({
+        erro: "Preencha todos os campos"
+      });
+    }
+
+
+    const [existe] = await db.query(
+      "SELECT * FROM usuarios WHERE email = ?",
+      [email]
+    );
+
+
+    if (existe.length > 0) {
+      return res.status(409).json({
+        erro: "Esse email já está cadastrado"
+      });
+    }
+
+
+    await db.query(
+      `INSERT INTO usuarios
+      (nome, email, telefone, senha, tipo)
+      VALUES (?, ?, ?, ?, ?)`,
+      [
+        nome,
+        email,
+        telefone,
+        senha,
+        "cliente"
+      ]
+    );
+
+
+    res.json({
+      mensagem: "Cadastro realizado com sucesso"
+    });
+
+
+  } catch(error){
+
+    res.status(500).json({
+      erro:error.message
+    });
+
+  }
+
+});
+
 
 router.post("/login", async (req, res) => {
   try {
@@ -340,3 +402,19 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+router.post("/login", async (req, res) => {
+
+   // código do login
+
+});
+
+
+router.post("/cadastro", async (req, res) => {
+
+   // código do cadastro
+
+});
+
+
+module.exports = router;
