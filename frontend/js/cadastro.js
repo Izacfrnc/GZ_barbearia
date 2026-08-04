@@ -49,7 +49,7 @@ async function cadastrar() {
 
             alert("Conta criada com sucesso!");
 
-            window.location.href = "login.html";
+            window.location.href = "../login.html";
 
         } else {
 

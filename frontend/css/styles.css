@@ -18,7 +18,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 
-  background-image: url("fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@ body::before {
   position: fixed;
   inset: 0;
 
-  background-image: url("fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -322,10 +322,41 @@ body.dark {
 
 body.dark .kpi {
   background: #2a2a2a;
+  color: white;
+}
+
+body.dark .card,
+body.dark .tab-pane,
+body.dark .tabela-wrap,
+body.dark table,
+body.dark th,
+body.dark td {
+  color: white;
 }
 
 body.dark th {
   background: #2a2a2a;
+}
+
+body.dark td,
+body.dark .mensagem-vazia {
+  background: #1f1f1f;
+}
+
+body.dark .nav-tabs {
+  border-bottom: 1px solid #444;
+}
+
+body.dark .nav-tabs .nav-link {
+  color: #f3f3f3;
+  background: #262626;
+  border-color: #444 #444 #444;
+}
+
+body.dark .nav-tabs .nav-link.active {
+  color: white;
+  background: #1b1b1b;
+  border-color: #555 #555 transparent;
 }
 
 body.dark input,
@@ -372,7 +403,7 @@ body::before {
   position: fixed;
   inset: 0;
 
-  background-image: url("fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
 
   background-size: cover;
   background-position: center;
