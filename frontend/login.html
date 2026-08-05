@@ -1,176 +1,844 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Login</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #111;
-    }
 
-    .container {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-    .logo img {
-        width: 180px;
-    }
 
-    .box {
-        background: #1c1c1c;
-        padding: 25px;
-        border-radius: 10px;
-        width: 320px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        color: white;
-    }
-
-    h2 {
-        text-align: center;
-        color: #660000;
-        margin-bottom: 15px;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 5px;
-        outline: none;
-    }
-
-   button {
-    width: 150px;
-    height: 40px;
-    padding: 0;
-    background: #660000;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-
-    box-sizing: border-box; /* impede mudança por borda/padding */
-    display: block;
-    margin: 10px auto 0 auto;
-
-    flex-shrink: 0; /* evita o flex alterar tamanho (caso esteja em flex) */
+*{
+    box-sizing:border-box;
 }
 
-/* evita mudança no hover */
-button:hover {
-    background: #660000; /* mantém igual */
+
+body{
+
+    margin:0;
+
+    height:100vh;
+
+    font-family:'Poppins',sans-serif;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
 }
 
-    button:hover {
-        background: #880000;
+
+
+/* FUNDO */
+
+.fundo{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+
+    background-image:
+
+    linear-gradient(
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.75)
+    ),
+
+    url('/frontend/Imagens/fundo.login.jpeg');
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    z-index:-1;
+
+}
+
+
+
+/* PAINEL PRINCIPAL */
+
+.painel{
+
+    padding:50px;
+
+
+    background:rgba(20,20,20,0.70);
+
+
+    border-radius:30px;
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,0.6);
+
+
+    backdrop-filter:blur(8px);
+
+}
+
+
+
+
+.container{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:60px;
+
+}
+
+
+
+
+.logo img{
+
+    width:230px;
+
+
+    filter:
+
+    drop-shadow(0 0 20px rgba(102,0,0,0.6));
+
+}
+
+
+
+
+
+.box{
+
+    width:380px;
+
+
+    padding:35px;
+
+
+    background:rgba(30,30,30,0.95);
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,0.6);
+
+
+    color:white;
+
+}
+
+
+
+
+
+h2{
+
+
+    text-align:center;
+
+
+    color:#b30000;
+
+
+    margin-bottom:25px;
+
+
+    font-size:28px;
+
+
+}
+
+
+
+
+input{
+
+
+    width:100%;
+
+
+    padding:14px 15px;
+
+
+    margin-bottom:15px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    border-radius:10px;
+
+
+    background:#292929;
+
+
+    color:white;
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+input::placeholder{
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+input:focus{
+
+
+    box-shadow:0 0 0 2px #660000;
+
+
+}
+
+
+
+
+button:not(.tema-btn){
+
+
+    width:100%;
+
+
+    height:45px;
+
+
+    margin-top:10px;
+
+
+    background:#660000;
+
+
+    border:none;
+
+
+    border-radius:10px;
+
+
+    color:white;
+
+
+    font-size:16px;
+
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+
+button:not(.tema-btn):hover{
+
+
+    background:#990000;
+
+
+    transform:translateY(-2px);
+
+
+}
+
+
+
+
+/* BOTÃO TEMA */
+
+
+.tema-btn{
+
+
+    position:fixed;
+
+
+    bottom:25px;
+
+
+    right:25px;
+
+
+    width:55px;
+
+
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    background:#660000;
+
+
+    border:none;
+
+
+    color:white;
+
+
+    font-size:22px;
+
+
+    cursor:pointer;
+
+
+    box-shadow:
+
+    0 5px 15px rgba(0,0,0,0.4);
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+.tema-btn:hover{
+
+
+    background:#990000;
+
+
+    transform:scale(1.1);
+
+
+}
+
+
+
+
+.cadastro-link{
+
+
+    text-align:center;
+
+
+    margin-top:20px;
+
+
+    color:#ccc;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+.cadastro-link a{
+
+
+    color:#b30000;
+
+
+    text-decoration:none;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+.msg{
+
+
+    text-align:center;
+
+
+    margin-top:15px;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+/* MODO CLARO */
+
+
+body.light .fundo{
+
+    background-image:
+
+    linear-gradient(
+        rgba(255,255,255,0.15),
+        rgba(255,255,255,0.15)
+    ),
+
+    url('/frontend/Imagens/fundo.login.jpeg');
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+
+
+body.light .painel{
+
+
+    background:rgba(255,255,255,0.55);
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,0.25);
+
+
+}
+
+
+
+body.light .box{
+
+
+    background:white;
+
+    color:#222;
+
+}
+
+
+
+body.light input{
+
+
+    background:#eeeeee;
+
+    color:#222;
+
+
+}
+
+
+
+body.light input::placeholder{
+
+
+    color:#777;
+
+
+}
+
+
+
+body.light .cadastro-link{
+
+
+    color:#555;
+
+
+}
+
+
+
+@media(max-width:800px){
+
+
+    .container{
+
+
+        flex-direction:column;
+
+
+        gap:20px;
+
+
     }
 
-    .msg {
-        text-align: center;
-        margin-top: 10px;
-        font-size: 14px;
+
+
+    .painel{
+
+
+        padding:25px;
+
+
     }
 
-    @media (max-width: 700px) {
-        .container {
-            flex-direction: column;
-        }
+
+
+    .logo img{
+
+
+        width:150px;
+
+
     }
+
+
+    .box{
+
+
+        width:90%;
+
+
+    }
+
+
+}
+
+
 </style>
+
 </head>
 
 <body>
 
+
+<div class="fundo"></div>
+
+
+
+<button class="tema-btn" onclick="alternarTema()" id="temaBtn" type="button">
+
+☀️
+
+</button>
+
+
+
+
+<div class="painel">
+
+
 <div class="container">
 
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="/frontend/Imagens/1.png" alt="Logo">
-    </div>
 
-    <!-- LOGIN -->
-    <div class="box">
-        <h2>Login</h2>
 
-        <input type="text" id="user" placeholder="Usuário">
-        <input type="password" id="pass" placeholder="Senha">
+<div class="logo">
 
-        <button onclick="login()">Entrar</button>
-
-        <p class="cadastro-link">
-    Não tem uma conta?
-    <a href="../frontend/user/cadastro.html">Criar conta</a>
-</p>
-
-        <div class="msg" id="msg"></div>
-    </div>
+<img src="/frontend/Imagens/1.png" alt="Logo">
 
 </div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>Login</h2>
+
+
+
+
+<input 
+type="text" 
+id="user" 
+placeholder="E-mail">
+
+
+
+
+
+<input 
+type="password" 
+id="pass" 
+placeholder="Senha">
+
+
+
+
+
+<button onclick="login()">
+
+Entrar
+
+</button>
+
+
+
+
+
+
+<p class="cadastro-link">
+
+
+Não tem uma conta?
+
+
+<a href="../frontend/user/cadastro.html">
+
+Criar conta
+
+</a>
+
+
+</p>
+
+
+
+
+
+<div class="msg" id="msg"></div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
 
 <script>
 
 
-async function login() {
-    const user = document.getElementById("user").value;
-    const pass = document.getElementById("pass").value;
-    const msg = document.getElementById("msg");
+async function login(){
 
-    try {
 
-        const resposta = await fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+    const user=document.getElementById("user").value;
+
+    const pass=document.getElementById("pass").value;
+
+    const msg=document.getElementById("msg");
+
+
+
+    try{
+
+
+        const resposta = await fetch("http://localhost:3000/login",{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
             },
-            body: JSON.stringify({
-                email: user,
-                senha: pass
+
+            body:JSON.stringify({
+
+                email:user,
+
+                senha:pass
+
             })
+
         });
+
+
+
 
         const dados = await resposta.json();
 
-        if (resposta.ok) {
 
-            localStorage.setItem("logado", "true");
-            localStorage.setItem("nome", dados.nome);
-            localStorage.setItem("tipo", dados.tipo);
 
-            if (dados.tipo === "adm") {
-                window.location.href = "admin/dashboard.html";
-            } else {
-                window.location.href = "user/cliente.html";
+
+
+        if(resposta.ok){
+
+
+
+            localStorage.setItem("logado","true");
+
+            localStorage.setItem("nome",dados.nome);
+
+            localStorage.setItem("tipo",dados.tipo);
+
+
+
+
+
+
+            if(dados.tipo==="adm"){
+
+
+                window.location.href="admin/dashboard.html";
+
+
+            }else{
+
+
+                window.location.href="user/cliente.html";
+
+
             }
 
-        } else {
 
-            msg.innerText = dados.erro;
-            msg.style.color = "red";
+
+
+        }else{
+
+
+            msg.innerText=dados.erro;
+
+            msg.style.color="red";
+
 
         }
 
-    } catch (erro) {
+
+
+
+
+    }catch(erro){
+
 
         console.error(erro);
 
-        msg.innerText = "Erro ao conectar com o servidor.";
-        msg.style.color = "red";
+
+        msg.innerText="Erro ao conectar com o servidor.";
+
+        msg.style.color="red";
+
+
     }
+
+
+
 }
+
+
+
+
+
+
+function alternarTema(){
+
+
+    document.body.classList.toggle("light");
+
+
+
+    const botao=document.getElementById("temaBtn");
+
+
+
+
+    if(document.body.classList.contains("light")){
+
+
+        localStorage.setItem("tema","claro");
+
+
+        botao.innerHTML="🌙";
+
+
+
+    }else{
+
+
+        localStorage.setItem("tema","escuro");
+
+
+        botao.innerHTML="☀️";
+
+
+    }
+
+
+}
+
+
+
+
+
+
+window.onload=function(){
+
+
+    const tema=localStorage.getItem("tema");
+
+
+    const botao=document.getElementById("temaBtn");
+
+
+
+
+    if(tema==="claro"){
+
+
+
+        document.body.classList.add("light");
+
+
+
+        botao.innerHTML="🌙";
+
+
+
+    }else{
+
+
+
+        botao.innerHTML="☀️";
+
+
+    }
+
+
+
+}
+
+
 
 </script>
 
+
+
 </body>
+
 </html>

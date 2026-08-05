@@ -601,3 +601,38 @@ async function iniciarCliente() {
         await carregarAgendamentos();
     }
 }
+
+
+function alternarTema(){
+
+    document.body.classList.toggle("light");
+
+
+    if(document.body.classList.contains("light")){
+
+        localStorage.setItem("tema","claro");
+
+    }else{
+
+        localStorage.setItem("tema","escuro");
+
+    }
+
+}
+
+
+
+window.onload = function(){
+
+
+    const tema = localStorage.getItem("tema");
+
+
+    if(tema === "claro"){
+
+        document.body.classList.add("light");
+
+    }
+
+
+}

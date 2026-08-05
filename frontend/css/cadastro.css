@@ -3,11 +3,14 @@
 =========================== */
 
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
+
 }
+
 
 /* ===========================
    BODY
@@ -15,18 +18,26 @@
 
 body{
 
-    background-image:url("fundo_barbearia.JPG");
+    background-image:url("/frontend/Imagens/fundo_cadastro");
+
     background-size:cover;
+
     background-position:center;
+
     background-repeat:no-repeat;
 
     min-height:100vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
+    transition:.3s;
+
 }
+
 
 body::before{
 
@@ -40,7 +51,11 @@ body::before{
 
     z-index:-1;
 
+    transition:.3s;
+
 }
+
+
 
 /* ===========================
    CARD
@@ -60,10 +75,14 @@ body::before{
 
     animation:aparecer .5s;
 
+    transition:.3s;
+
 }
 
+
+
 /* ===========================
-   TÍTULOS
+   TITULOS
 =========================== */
 
 .cadastro-titulo{
@@ -78,6 +97,7 @@ body::before{
 
 }
 
+
 .cadastro-subtitulo{
 
     text-align:center;
@@ -89,6 +109,8 @@ body::before{
     font-weight:500;
 
 }
+
+
 
 /* ===========================
    INPUTS
@@ -112,6 +134,7 @@ body::before{
 
 }
 
+
 .cadastro-input:focus{
 
     outline:none;
@@ -122,8 +145,10 @@ body::before{
 
 }
 
+
+
 /* ===========================
-   BOTÃO
+   BOTÃO CADASTRO
 =========================== */
 
 .cadastro-btn{
@@ -150,6 +175,7 @@ body::before{
 
 }
 
+
 .cadastro-btn:hover{
 
     background:#600000;
@@ -157,6 +183,8 @@ body::before{
     transform:translateY(-2px);
 
 }
+
+
 
 /* ===========================
    LINK
@@ -172,6 +200,7 @@ body::before{
 
 }
 
+
 .cadastro-link a{
 
     color:#8B0000;
@@ -182,11 +211,46 @@ body::before{
 
 }
 
-.cadastro-link a:hover{
 
-    text-decoration:underline;
+
+/* ===========================
+   BOTÃO TEMA
+=========================== */
+
+.tema-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:#660000;
+
+    border:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
 
 }
+
+
+.tema-btn:hover{
+
+    background:#990000;
+
+}
+
+
 
 /* ===========================
    ANIMAÇÃO
@@ -202,6 +266,7 @@ body::before{
 
     }
 
+
     to{
 
         opacity:1;
@@ -212,11 +277,114 @@ body::before{
 
 }
 
+
+
+/* ===========================
+   MODO CLARO
+=========================== */
+
+
+body.light{
+
+    background-image:url("/frontend/Imagens/fundo_cadastro.jpg");
+
+}
+
+
+
+body.light::before{
+
+    background:rgba(255,255,255,.25);
+
+}
+
+
+
+/* Caixa */
+
+body.light .cadastro-container{
+
+    background:#222;
+
+    color:white;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+
+}
+
+
+
+/* Títulos */
+
+body.light .cadastro-titulo{
+
+    color:#ff3333;
+
+}
+
+
+body.light .cadastro-subtitulo{
+
+    color:#ddd;
+
+}
+
+
+
+/* Campos */
+
+body.light .cadastro-input{
+
+    background:#333;
+
+    color:white;
+
+    border:1px solid #666;
+
+}
+
+
+body.light .cadastro-input::placeholder{
+
+    color:#bbb;
+
+}
+
+
+
+/* Botão */
+
+body.light .cadastro-btn{
+
+    background:#8B0000;
+
+}
+
+
+
+/* Link */
+
+body.light .cadastro-link{
+
+    color:#ddd;
+
+}
+
+
+body.light .cadastro-link a{
+
+    color:#ff3333;
+
+}
+
+
+
 /* ===========================
    RESPONSIVO
 =========================== */
 
 @media(max-width:500px){
+
 
     .cadastro-container{
 
@@ -226,10 +394,46 @@ body::before{
 
     }
 
+
     .cadastro-titulo{
 
         font-size:28px;
 
     }
+
+}
+
+/* CORREÇÃO FINAL DO FUNDO NO MODO CLARO */
+
+body.light{
+
+    background-image:url("/frontend/Imagens/fundo_cadastro");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
+
+
+body.light::before{
+
+    background:rgba(255,255,255,0.15);
+
+}
+
+/* REMOVE FUNDO BRANCO DO AUTOCOMPLETE */
+
+body.light .cadastro-input:-webkit-autofill,
+body.light .cadastro-input:-webkit-autofill:hover,
+body.light .cadastro-input:-webkit-autofill:focus{
+
+    -webkit-text-fill-color:white;
+
+    box-shadow:0 0 0px 1000px #333 inset;
+
+    transition:background-color 9999s ease-in-out 0s;
 
 }

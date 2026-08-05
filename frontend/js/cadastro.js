@@ -8,14 +8,18 @@ async function cadastrar() {
 
 
     if (!nome || !email || !telefone || !senha || !confirmarSenha) {
+
         alert("Preencha todos os campos!");
         return;
+
     }
 
 
     if (senha !== confirmarSenha) {
+
         alert("As senhas não são iguais!");
         return;
+
     }
 
 
@@ -64,6 +68,58 @@ async function cadastrar() {
         console.error(erro);
 
         alert("Erro ao conectar com o servidor!");
+
+    }
+
+}
+
+
+
+// ======================
+// MODO ESCURO / CLARO
+// ======================
+
+function alternarTema() {
+
+    document.body.classList.toggle("light");
+
+    const botao = document.getElementById("temaBtn");
+
+
+    if (document.body.classList.contains("light")) {
+
+        localStorage.setItem("tema", "light");
+
+        botao.innerHTML = "☀️";
+
+    } else {
+
+        localStorage.setItem("tema", "dark");
+
+        botao.innerHTML = "🌙";
+
+    }
+
+}
+
+
+
+window.onload = function () {
+
+    const tema = localStorage.getItem("tema");
+
+    const botao = document.getElementById("temaBtn");
+
+
+    if (tema === "light") {
+
+        document.body.classList.add("light");
+
+        botao.innerHTML = "☀️";
+
+    } else {
+
+        botao.innerHTML = "🌙";
 
     }
 
