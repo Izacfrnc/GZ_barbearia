@@ -1,844 +1,598 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-<title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-<style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      const savedTema = localStorage.getItem("tema");
+      if (savedTema === "light") {
+        document.documentElement.classList.add("light");
+      } else {
+        document.documentElement.classList.remove("light");
+      }
+    </script>
+    <style>
+      /* ===========================
+           RESET
+        =========================== */
 
+      * {
+        margin: 0;
 
-*{
-    box-sizing:border-box;
-}
+        padding: 0;
 
+        box-sizing: border-box;
 
-body{
+        font-family: "Poppins", sans-serif;
+      }
 
-    margin:0;
+      /* ===========================
+           BODY
+        =========================== */
 
-    height:100vh;
+      body {
+        margin: 0;
 
-    font-family:'Poppins',sans-serif;
+        min-height: 100vh;
 
-    display:flex;
+        display: flex;
 
-    justify-content:center;
+        justify-content: center;
 
-    align-items:center;
+        align-items: center;
 
-    overflow:hidden;
+        overflow: hidden;
 
-}
+        transition: 0.3s;
+      }
 
+      /* ===========================
+           FUNDO
+        =========================== */
 
+      .fundo {
+        position: fixed;
 
-/* FUNDO */
+        inset: 0;
 
-.fundo{
+        background-image: url("/frontend/Imagens/fundo_cadastro");
 
-    position:fixed;
+        background-size: cover;
 
-    top:0;
+        background-position: center;
 
-    left:0;
+        background-repeat: no-repeat;
 
-    width:100%;
+        z-index: -2;
+      }
 
-    height:100%;
+      .fundo::before {
+        content: "";
 
+        position: absolute;
 
-    background-image:
+        inset: 0;
 
-    linear-gradient(
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0.75)
-    ),
+        background: rgba(0, 0, 0, 0.45);
 
-    url('/frontend/Imagens/fundo.login.jpeg');
+        transition: 0.3s;
+      }
 
+      /* ===========================
+           PAINEL
+        =========================== */
 
-    background-size:cover;
+      .painel {
+        padding: 40px;
 
-    background-position:center;
+        background: white;
 
-    z-index:-1;
+        border-radius: 20px;
 
-}
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 
+        transition: 0.3s;
+      }
 
+      /* ===========================
+           CONTAINER
+        =========================== */
 
-/* PAINEL PRINCIPAL */
+      .container {
+        display: flex;
 
-.painel{
+        align-items: center;
 
-    padding:50px;
+        gap: 40px;
+      }
 
+      /* ===========================
+           LOGO
+        =========================== */
 
-    background:rgba(20,20,20,0.70);
+      .logo img {
+        width: 230px;
 
+        filter: drop-shadow(0 0 15px rgba(139, 0, 0, 0.35));
 
-    border-radius:30px;
+        transition: 0.3s;
+      }
+/* ===========================
+   CAIXA - MODO ESCURO
+=========================== */
 
+html.light .box {
+    background: #222;
+
+    color: white;
 
     box-shadow:
-
-    0 20px 50px rgba(0,0,0,0.6);
-
-
-    backdrop-filter:blur(8px);
-
+        0 15px 40px
+        rgba(0, 0, 0, 0.6);
 }
+      /* ===========================
+           CAIXA
+        =========================== */
 
+      .box {
+        width: 380px;
 
+        padding: 35px;
 
+        background: white;
 
-.container{
+        border-radius: 20px;
 
-    display:flex;
+        color: #222;
 
-    align-items:center;
+        transition: 0.3s;
+      }
 
-    gap:60px;
+      /* ===========================
+           TÍTULO
+        =========================== */
 
-}
+      h2 {
+        text-align: center;
 
+        color: #8b0000;
 
+        font-size: 30px;
 
+        margin-bottom: 25px;
+      }
 
-.logo img{
+      /* ===========================
+           INPUTS
+        =========================== */
 
-    width:230px;
+      input {
+        width: 100%;
 
+        padding: 14px;
 
-    filter:
+        margin-bottom: 18px;
 
-    drop-shadow(0 0 20px rgba(102,0,0,0.6));
+        border: 1px solid #ccc;
 
-}
+        border-radius: 10px;
 
+        background: white;
 
+        color: #222;
 
+        font-size: 15px;
 
+        outline: none;
 
-.box{
+        transition: 0.3s;
+      }
 
-    width:380px;
+      input::placeholder {
+        color: #888;
+      }
 
+      input:focus {
+        border-color: #8b0000;
 
-    padding:35px;
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.25);
+      }
 
+      /* ===========================
+           BOTÃO
+        =========================== */
 
-    background:rgba(30,30,30,0.95);
+      button:not(.tema-btn) {
+        width: 100%;
 
+        padding: 14px;
 
-    border-radius:20px;
+        height: auto;
 
+        margin-top: 5px;
 
-    box-shadow:
+        background: #8b0000;
 
-    0 15px 40px rgba(0,0,0,0.6);
+        color: white;
 
+        border: none;
 
-    color:white;
+        border-radius: 10px;
 
-}
+        font-size: 17px;
 
+        font-weight: bold;
 
+        cursor: pointer;
 
+        transition: 0.3s;
+      }
 
+      button:not(.tema-btn):hover {
+        background: #600000;
 
-h2{
+        transform: translateY(-2px);
+      }
 
+      /* ===========================
+           BOTÃO TEMA
+        =========================== */
 
-    text-align:center;
+      .tema-btn {
+        position: fixed;
 
+        bottom: 25px;
 
-    color:#b30000;
+        right: 25px;
 
+        width: 55px;
 
-    margin-bottom:25px;
+        height: 55px;
 
+        border-radius: 50%;
 
-    font-size:28px;
+        background: #660000;
 
+        border: none;
 
-}
+        color: white;
 
+        font-size: 22px;
 
+        cursor: pointer;
 
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 
-input{
+        transition: 0.3s;
+      }
 
+      .tema-btn:hover {
+        background: #990000;
 
-    width:100%;
+        transform: scale(1.05);
+      }
 
+      /* ===========================
+           LINK
+        =========================== */
 
-    padding:14px 15px;
+      .cadastro-link {
+        text-align: center;
 
+        margin-top: 22px;
 
-    margin-bottom:15px;
+        color: #555;
 
+        font-size: 14px;
+      }
 
-    border:none;
+      .cadastro-link a {
+        color: #8b0000;
 
+        text-decoration: none;
 
-    outline:none;
+        font-weight: 600;
+      }
 
+      /* ===========================
+           MENSAGEM
+        =========================== */
 
-    border-radius:10px;
+      .msg {
+        text-align: center;
 
+        margin-top: 15px;
 
-    background:#292929;
+        font-size: 14px;
+      }
 
+      /* ===========================
+           MODO CLARO
+        =========================== */
 
-    color:white;
+      html.light .fundo,
+      body.light .fundo {
+        background-image: url("/frontend/Imagens/fundo_cadastro");
 
+        background-size: cover;
 
-    font-size:15px;
+        background-position: center;
 
+        background-repeat: no-repeat;
+      }
 
-}
+      html.light .fundo::before,
+      body.light .fundo::before {
+        background: rgba(255, 255, 255, 0.15);
+      }
 
+      html.light .painel,
+      body.light .painel {
+        background: #222;
 
+        color: white;
 
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      }
 
-input::placeholder{
+      html.light .box,
+      body.light .box {
+        background: #222;
 
+        color: white;
 
-    color:#aaa;
+        box-shadow: none;
+      }
 
+      html.light h2,
+      body.light h2 {
+        color: #ff3333;
+      }
 
-}
+      html.light input,
+      body.light input {
+        background: #333;
 
+        color: white;
 
+        border: 1px solid #666;
+      }
 
+      html.light input::placeholder,
+      body.light input::placeholder {
+        color: #bbb;
+      }
 
-input:focus{
+      html.light input:focus,
+      body.light input:focus {
+        border-color: #8b0000;
 
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.25);
+      }
 
-    box-shadow:0 0 0 2px #660000;
+      html.light button:not(.tema-btn),
+      body.light button:not(.tema-btn) {
+        background: #8b0000;
+      }
 
+      html.light button:not(.tema-btn):hover,
+      body.light button:not(.tema-btn):hover {
+        background: #600000;
+      }
 
-}
+      html.light .cadastro-link,
+      body.light .cadastro-link {
+        color: #ddd;
+      }
 
+      html.light .cadastro-link a,
+      body.light .cadastro-link a {
+        color: #ff3333;
+      }
 
+      /* ===========================
+           AUTOCOMPLETE
+        =========================== */
 
+      html.light input:-webkit-autofill,
+      body.light input:-webkit-autofill,
+      html.light input:-webkit-autofill:hover,
+      body.light input:-webkit-autofill:hover,
+      html.light input:-webkit-autofill:focus,
+      body.light input:-webkit-autofill:focus {
+        -webkit-text-fill-color: white;
 
-button:not(.tema-btn){
+        box-shadow: 0 0 0px 1000px #333 inset;
 
+        transition: background-color 9999s ease-in-out 0s;
+      }
 
-    width:100%;
+      /* ===========================
+           ANIMAÇÃO
+        =========================== */
 
+      @keyframes aparecer {
+        from {
+          opacity: 0;
 
-    height:45px;
-
-
-    margin-top:10px;
-
-
-    background:#660000;
-
-
-    border:none;
-
-
-    border-radius:10px;
-
-
-    color:white;
-
-
-    font-size:16px;
-
-
-    font-weight:600;
-
-
-    cursor:pointer;
-
-
-    transition:0.3s;
-
-
-}
-
-
-
-
-button:not(.tema-btn):hover{
-
-
-    background:#990000;
-
-
-    transform:translateY(-2px);
-
-
-}
-
-
-
-
-/* BOTÃO TEMA */
-
-
-.tema-btn{
-
-
-    position:fixed;
-
-
-    bottom:25px;
-
-
-    right:25px;
-
-
-    width:55px;
-
-
-    height:55px;
-
-
-    border-radius:50%;
-
-
-    background:#660000;
-
-
-    border:none;
-
-
-    color:white;
-
-
-    font-size:22px;
-
-
-    cursor:pointer;
-
-
-    box-shadow:
-
-    0 5px 15px rgba(0,0,0,0.4);
-
-
-    transition:0.3s;
-
-
-}
-
-
-
-.tema-btn:hover{
-
-
-    background:#990000;
-
-
-    transform:scale(1.1);
-
-
-}
-
-
-
-
-.cadastro-link{
-
-
-    text-align:center;
-
-
-    margin-top:20px;
-
-
-    color:#ccc;
-
-
-    font-size:14px;
-
-
-}
-
-
-
-.cadastro-link a{
-
-
-    color:#b30000;
-
-
-    text-decoration:none;
-
-
-    font-weight:600;
-
-
-}
-
-
-
-.msg{
-
-
-    text-align:center;
-
-
-    margin-top:15px;
-
-
-    font-size:14px;
-
-
-}
-
-
-
-/* MODO CLARO */
-
-
-body.light .fundo{
-
-    background-image:
-
-    linear-gradient(
-        rgba(255,255,255,0.15),
-        rgba(255,255,255,0.15)
-    ),
-
-    url('/frontend/Imagens/fundo.login.jpeg');
-
-    background-size:cover;
-
-    background-position:center;
-
-}
-
-
-
-body.light .painel{
-
-
-    background:rgba(255,255,255,0.55);
-
-
-    box-shadow:
-
-    0 20px 50px rgba(0,0,0,0.25);
-
-
-}
-
-
-
-body.light .box{
-
-
-    background:white;
-
-    color:#222;
-
-}
-
-
-
-body.light input{
-
-
-    background:#eeeeee;
-
-    color:#222;
-
-
-}
-
-
-
-body.light input::placeholder{
-
-
-    color:#777;
-
-
-}
-
-
-
-body.light .cadastro-link{
-
-
-    color:#555;
-
-
-}
-
-
-
-@media(max-width:800px){
-
-
-    .container{
-
-
-        flex-direction:column;
-
-
-        gap:20px;
-
-
-    }
-
-
-
-    .painel{
-
-
-        padding:25px;
-
-
-    }
-
-
-
-    .logo img{
-
-
-        width:150px;
-
-
-    }
-
-
-    .box{
-
-
-        width:90%;
-
-
-    }
-
-
-}
-
-
-</style>
-
-</head>
-
-<body>
-
-
-<div class="fundo"></div>
-
-
-
-<button class="tema-btn" onclick="alternarTema()" id="temaBtn" type="button">
-
-☀️
-
-</button>
-
-
-
-
-<div class="painel">
-
-
-<div class="container">
-
-
-
-<div class="logo">
-
-<img src="/frontend/Imagens/1.png" alt="Logo">
-
-</div>
-
-
-
-
-
-<div class="box">
-
-
-<h2>Login</h2>
-
-
-
-
-<input 
-type="text" 
-id="user" 
-placeholder="E-mail">
-
-
-
-
-
-<input 
-type="password" 
-id="pass" 
-placeholder="Senha">
-
-
-
-
-
-<button onclick="login()">
-
-Entrar
-
-</button>
-
-
-
-
-
-
-<p class="cadastro-link">
-
-
-Não tem uma conta?
-
-
-<a href="../frontend/user/cadastro.html">
-
-Criar conta
-
-</a>
-
-
-</p>
-
-
-
-
-
-<div class="msg" id="msg"></div>
-
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<script>
-
-
-async function login(){
-
-
-    const user=document.getElementById("user").value;
-
-    const pass=document.getElementById("pass").value;
-
-    const msg=document.getElementById("msg");
-
-
-
-    try{
-
-
-        const resposta = await fetch("http://localhost:3000/login",{
-
-            method:"POST",
-
-            headers:{
-
-                "Content-Type":"application/json"
-
-            },
-
-            body:JSON.stringify({
-
-                email:user,
-
-                senha:pass
-
-            })
-
-        });
-
-
-
-
-        const dados = await resposta.json();
-
-
-
-
-
-        if(resposta.ok){
-
-
-
-            localStorage.setItem("logado","true");
-
-            localStorage.setItem("nome",dados.nome);
-
-            localStorage.setItem("tipo",dados.tipo);
-
-
-
-
-
-
-            if(dados.tipo==="adm"){
-
-
-                window.location.href="admin/dashboard.html";
-
-
-            }else{
-
-
-                window.location.href="user/cliente.html";
-
-
-            }
-
-
-
-
-        }else{
-
-
-            msg.innerText=dados.erro;
-
-            msg.style.color="red";
-
-
+          transform: translateY(15px);
         }
 
-
-
-
-
-    }catch(erro){
-
-
-        console.error(erro);
-
-
-        msg.innerText="Erro ao conectar com o servidor.";
-
-        msg.style.color="red";
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-function alternarTema(){
-
-
-    document.body.classList.toggle("light");
-
-
-
-    const botao=document.getElementById("temaBtn");
-
-
-
-
-    if(document.body.classList.contains("light")){
-
-
-        localStorage.setItem("tema","claro");
-
-
-        botao.innerHTML="🌙";
-
-
-
-    }else{
-
-
-        localStorage.setItem("tema","escuro");
-
-
-        botao.innerHTML="☀️";
-
-
-    }
-
-
-}
-
-
-
-
-
-
-window.onload=function(){
-
-
-    const tema=localStorage.getItem("tema");
-
-
-    const botao=document.getElementById("temaBtn");
-
-
-
-
-    if(tema==="claro"){
-
-
-
-        document.body.classList.add("light");
-
-
-
-        botao.innerHTML="🌙";
-
-
-
-    }else{
-
-
-
-        botao.innerHTML="☀️";
-
-
-    }
-
-
-
-}
-
-
-
+        to {
+          opacity: 1;
+
+          transform: translateY(0);
+        }
+      }
+
+      /* ===========================
+           RESPONSIVO
+        =========================== */
+
+      @media (max-width: 800px) {
+        body {
+          overflow-y: auto;
+        }
+
+        .painel {
+          width: 95%;
+
+          padding: 25px;
+        }
+
+        .container {
+          flex-direction: column;
+
+          gap: 25px;
+        }
+
+        .logo img {
+          width: 150px;
+        }
+
+        .box {
+          width: 100%;
+
+          padding: 25px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .painel {
+          width: 95%;
+
+          padding: 20px;
+        }
+
+        .box {
+          padding: 20px;
+        }
+
+        h2 {
+          font-size: 26px;
+        }
+
+        .logo img {
+          width: 130px;
+        }
+      }
+    </style>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.documentElement.classList.contains("light")) {
+            document.body.classList.add("light");
+        } else {
+            document.body.classList.remove("light");
+        }
+    });
 </script>
+  </head>
 
+  <body>
+    <div class="fundo"></div>
 
+    <button
+      class="tema-btn"
+      onclick="alternarTema()"
+      id="temaBtn"
+      type="button"
+    >
+      ☀️
+    </button>
 
-</body>
+    <div class="painel">
+      <div class="container">
+        <div class="logo">
+          <img src="/frontend/Imagens/1.png" alt="Logo" />
+        </div>
 
+        <div class="box">
+          <h2>Login</h2>
+
+          <input type="text" id="user" placeholder="E-mail" />
+
+          <input type="password" id="pass" placeholder="Senha" />
+
+          <button onclick="login()">Entrar</button>
+
+          <p class="cadastro-link">
+            Não tem uma conta?
+
+            <a href="../frontend/user/cadastro.html"> Criar conta </a>
+          </p>
+
+          <div class="msg" id="msg"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      async function login() {
+        const user = document.getElementById("user").value;
+
+        const pass = document.getElementById("pass").value;
+
+        const msg = document.getElementById("msg");
+
+        try {
+          const resposta = await fetch("http://localhost:3000/login", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              email: user,
+
+              senha: pass,
+            }),
+          });
+
+          const dados = await resposta.json();
+
+          if (resposta.ok) {
+            localStorage.setItem("logado", "true");
+
+            localStorage.setItem("nome", dados.nome);
+
+            localStorage.setItem("tipo", dados.tipo);
+
+            if (dados.tipo === "adm") {
+              window.location.href = "admin/dashboard.html";
+            } else {
+              window.location.href = "user/cliente.html";
+            }
+          } else {
+            msg.innerText = dados.erro;
+
+            msg.style.color = "red";
+          }
+        } catch (erro) {
+          console.error(erro);
+
+          msg.innerText = "Erro ao conectar com o servidor.";
+
+          msg.style.color = "red";
+        }
+      }
+    </script>
+
+    <!-- Tema global -->
+
+    <script src="/frontend/js/tema.js"></script>
+  </body>
 </html>
