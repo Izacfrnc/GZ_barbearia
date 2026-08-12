@@ -18,7 +18,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 
-  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-concrete.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@ body::before {
   position: fixed;
   inset: 0;
 
-  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-concrete.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -403,7 +403,7 @@ body::before {
   position: fixed;
   inset: 0;
 
-  background-image: url("/frontend/Imagens/fundo_barbearia.JPG");
+  background-image: url("/frontend/Imagens/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-concrete.jpg");
 
   background-size: cover;
   background-position: center;

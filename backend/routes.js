@@ -390,10 +390,11 @@ router.post("/login", async (req, res) => {
     }
 
     const usuario = usuarios[0];
+    const tipo = String(usuario.tipo || "").trim().toLowerCase();
 
     res.json({
       nome: usuario.nome,
-      tipo: usuario.tipo
+      tipo
     });
 
   } catch (error) {

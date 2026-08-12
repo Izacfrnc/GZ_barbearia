@@ -565,13 +565,14 @@ html.light .box {
           const dados = await resposta.json();
 
           if (resposta.ok) {
+            const tipoUsuario = String(dados.tipo || "").trim().toLowerCase();
+            const ehAdmin = tipoUsuario === "adm" || tipoUsuario === "admin";
+
             localStorage.setItem("logado", "true");
-
             localStorage.setItem("nome", dados.nome);
+            localStorage.setItem("tipo", tipoUsuario);
 
-            localStorage.setItem("tipo", dados.tipo);
-
-            if (dados.tipo === "adm") {
+            if (ehAdmin) {
               window.location.href = "admin/dashboard.html";
             } else {
               window.location.href = "user/cliente.html";
