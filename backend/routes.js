@@ -499,7 +499,7 @@ router.post("/login", async (req, res) => {
       [email, senha]
     );
 
-    if (usuarios.length === 0) {
+        if (usuarios.length === 0) {
       return res.status(401).json({
         erro: "Email ou senha inválidos"
       });
