@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Criar Conta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===========================
+           RESET
+        =========================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* ===========================
+           BODY
+        =========================== */
+
+      body {
+        background-image: url("/frontend/Imagens/fundo_cadastro");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: 0.3s;
+      }
+
+      body::before {
+        content: "";
+
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        z-index: -1;
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+           CARD
+        =========================== */
+
+      .cadastro-container {
+        width: 450px;
+
+        background: white;
+
+        padding: 40px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+           TÍTULOS
+        =========================== */
+
+      .cadastro-titulo {
+        text-align: center;
+
+        color: #8b0000;
+
+        font-size: 34px;
+
+        margin-bottom: 5px;
+      }
+
+      .cadastro-subtitulo {
+        text-align: center;
+
+        color: #666;
+
+        margin-bottom: 30px;
+
+        font-weight: 500;
+      }
+
+      /* ===========================
+           INPUTS
+        =========================== */
+
+      .cadastro-input {
+        width: 100%;
+
+        padding: 14px;
+
+        margin-bottom: 18px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        font-size: 15px;
+
+        transition: 0.3s;
+      }
+
+      .cadastro-input:focus {
+        outline: none;
+
+        border-color: #8b0000;
+
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.25);
+      }
+
+      /* ===========================
+           BOTÃO CADASTRO
+        =========================== */
+
+      .cadastro-btn {
+        width: 100%;
+
+        padding: 14px;
+
+        background: #8b0000;
+
+        color: white;
+
+        border: none;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      .cadastro-btn:hover {
+        background: #600000;
+
+        transform: translateY(-2px);
+      }
+
+      /* ===========================
+           LINK
+        =========================== */
+
+      .cadastro-link {
+        text-align: center;
+
+        margin-top: 22px;
+
+        color: #555;
+      }
+
+      .cadastro-link a {
+        color: #8b0000;
+
+        text-decoration: none;
+
+        font-weight: 600;
+      }
+
+      /* ===========================
+           BOTÃO TEMA
+        =========================== */
+
+      .tema-btn {
+        position: fixed;
+
+        bottom: 25px;
+        right: 25px;
+
+        width: 55px;
+        height: 55px;
+
+        border-radius: 50%;
+
+        background: #660000;
+
+        border: none;
+
+        color: white;
+
+        font-size: 22px;
+
+        cursor: pointer;
+
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+
+        transition: 0.3s;
+      }
+
+      .tema-btn:hover {
+        background: #990000;
+      }
+
+      /* ===========================
+           MODO CLARO
+        =========================== */
+
+      body.light {
+        background-image: url("/frontend/Imagens/fundo_cadastro");
+
+        background-size: cover;
+
+        background-position: center;
+
+        background-repeat: no-repeat;
+      }
+
+      body.light::before {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      body.light .cadastro-container {
+        background: #222;
+
+        color: white;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      body.light .cadastro-titulo {
+        color: #ff3333;
+      }
+
+      body.light .cadastro-subtitulo {
+        color: #ddd;
+      }
+
+      body.light .cadastro-input {
+        background: #333;
+
+        color: white;
+
+        border: 1px solid #666;
+      }
+
+      body.light .cadastro-input::placeholder {
+        color: #bbb;
+      }
+
+      body.light .cadastro-btn {
+        background: #8b0000;
+      }
+
+      body.light .cadastro-link {
+        color: #ddd;
+      }
+
+      body.light .cadastro-link a {
+        color: #ff3333;
+      }
+
+      /* ===========================
+           AUTOCOMPLETE
+        =========================== */
+
+      body.light .cadastro-input:-webkit-autofill,
+      body.light .cadastro-input:-webkit-autofill:hover,
+      body.light .cadastro-input:-webkit-autofill:focus {
+        -webkit-text-fill-color: white;
+
+        box-shadow: 0 0 0px 1000px #333 inset;
+
+        transition: background-color 9999s ease-in-out 0s;
+      }
+
+      /* ===========================
+           ANIMAÇÃO
+        =========================== */
+
+      @keyframes aparecer {
+        from {
+          opacity: 0;
+
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0);
+        }
+      }
+
+      /* ===========================
+           RESPONSIVO
+        =========================== */
+
+      @media (max-width: 500px) {
+        .cadastro-container {
+          width: 95%;
+
+          padding: 25px;
+        }
+
+        .cadastro-titulo {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cadastro-container">
+      <button class="tema-btn" id="temaBtn" type="button">☀️</button>
+
+      <h1 class="cadastro-titulo">GZ Barbearia</h1>
+
+      <h2 class="cadastro-subtitulo">Criar Conta</h2>
+
+      <input
+        class="cadastro-input"
+        type="text"
+        id="nome"
+        placeholder="Nome completo"
+      />
+
+      <input
+        class="cadastro-input"
+        type="email"
+        id="email"
+        placeholder="Email"
+      />
+
+      <input
+        class="cadastro-input"
+        type="tel"
+        id="telefone"
+        placeholder="Telefone"
+      />
+
+      <input
+        class="cadastro-input"
+        type="password"
+        id="senha"
+        placeholder="Senha"
+      />
+
+      <input
+        class="cadastro-input"
+        type="password"
+        id="confirmarSenha"
+        placeholder="Confirmar senha"
+      />
+
+      <button class="cadastro-btn" id="btnCadastrar" type="button">
+        Criar Conta
+      </button>
+
+      <p class="cadastro-link">
+        Já possui uma conta?
+
+        <a href="/frontend/login.html"> Entrar </a>
+      </p>
+    </div>
+
+    <script>
+      // ======================
+      // TEMA
+      // ======================
+
+      const botaoTema = document.getElementById("temaBtn");
+
+      function aplicarTema() {
+        const tema = localStorage.getItem("tema");
+
+        if (tema === "light") {
+          document.body.classList.add("light");
+
+          botaoTema.innerHTML = "🌙";
+        } else {
+          document.body.classList.remove("light");
+
+          botaoTema.innerHTML = "☀️";
+        }
+      }
+
+      function alternarTema() {
+        document.body.classList.toggle("light");
+
+        if (document.body.classList.contains("light")) {
+          localStorage.setItem("tema", "light");
+
+          botaoTema.innerHTML = "🌙";
+        } else {
+          localStorage.setItem("tema", "dark");
+
+          botaoTema.innerHTML = "☀️";
+        }
+      }
+
+      botaoTema.addEventListener("click", alternarTema);
+
+      // Aplica o tema salvo ao abrir a página
+      aplicarTema();
+
+      // ======================
+      // CADASTRO
+      // ======================
+
+      async function cadastrar() {
+        const nome = document.getElementById("nome").value;
+
+        const email = document.getElementById("email").value;
+
+        const telefone = document.getElementById("telefone").value;
+
+        const senha = document.getElementById("senha").value;
+
+        const confirmarSenha = document.getElementById("confirmarSenha").value;
+
+        if (!nome || !email || !telefone || !senha || !confirmarSenha) {
+          alert("Preencha todos os campos!");
+
+          return;
+        }
+
+        if (senha !== confirmarSenha) {
+          alert("As senhas não são iguais!");
+
+          return;
+        }
+
+        try {
+          const resposta = await fetch("http://localhost:3000/cadastro", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              nome: nome,
+
+              email: email,
+
+              telefone: telefone,
+
+              senha: senha,
+            }),
+          });
+
+          const dados = await resposta.json();
+
+          if (resposta.ok) {
+            alert("Conta criada com sucesso!");
+
+            window.location.href = "../login.html";
+          } else {
+            alert(dados.erro);
+          }
+        } catch (erro) {
+          console.error(erro);
+
+          alert("Erro ao conectar com o servidor!");
+        }
+      }
+
+      document
+        .getElementById("btnCadastrar")
+        .addEventListener("click", cadastrar);
+    </script>
+  </body>
+</html>
+

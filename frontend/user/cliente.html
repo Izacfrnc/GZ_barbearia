@@ -33,55 +33,6 @@
         <p>Bem-vindo à área do cliente.</p>
     </section>
 
-    <section class="card secao">
-        <h2>Meus Dados</h2>
-
-        <form id="form-cliente" class="form-grid">
-
-            <input type="hidden" id="cliente-id">
-
-            <div>
-                <label for="cliente-nome">Nome</label>
-                <input type="text" id="cliente-nome" required>
-            </div>
-
-            <div>
-                <label for="cliente-telefone">Telefone</label>
-                <input type="text" id="cliente-telefone" required>
-            </div>
-
-            <div class="full botoes">
-                <button type="submit">Salvar meus dados</button>
-
-                <button
-                    type="button"
-                    id="cancelar-cliente"
-                    class="perigo">
-                    Cancelar
-                </button>
-            </div>
-
-            <div class="tabela-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Telefone</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="lista-clientes">
-                        <tr>
-                            <td colspan="4">Carregando...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </form>
-    </section>
 
     <section class="card secao">
         <h2>Agendamento</h2>
@@ -100,19 +51,20 @@
                 <input type="time" id="agendamento-horario" required>
             </div>
 
-            <div>
-                <label for="agendamento-cliente">Cliente</label>
-                <select id="agendamento-cliente" required>
-                    <option value="">Selecione</option>
-                </select>
-            </div>
+        
 
-            <div>
-                <label for="agendamento-servico">Serviço</label>
-                <select id="agendamento-servico" required>
-                    <option value="">Selecione</option>
-                </select>
-            </div>
+            <div class="full">
+    <label>Escolha seu corte</label>
+
+    <div id="lista-servicos-cliente" class="servicos-cliente">
+        <p>Carregando cortes...</p>
+    </div>
+
+    <!-- Continua existindo para o sistema usar o ID do serviço -->
+    <select id="agendamento-servico" style="display: none;">
+        <option value="">Selecione</option>
+    </select>
+</div>
 
             <div class="full">
                 <label for="agendamento-funcionario">Funcionário</label>
@@ -181,11 +133,11 @@ if (nome) {
 document.getElementById("btnSair").addEventListener("click", () => {
     localStorage.removeItem("nome");
     localStorage.removeItem("tipo");
-    window.location.href = "login.html";
+    window.location.href = "../login.html";
 });
 </script>
 
-<script src="js/app.js"></script>
+<script src="/frontend/js/app.js"></script>
 
 <script>
 if ("serviceWorker" in navigator) {

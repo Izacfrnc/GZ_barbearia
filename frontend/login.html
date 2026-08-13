@@ -1,176 +1,677 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+  <head>
+    <meta charset="UTF-8" />
 
-<style>
-    body {
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      const savedTema = localStorage.getItem("tema");
+
+      if (savedTema === "light") {
+        document.documentElement.classList.add("light");
+      } else {
+        document.documentElement.classList.remove("light");
+      }
+    </script>
+
+    <style>
+      /* ===========================
+         RESET
+      =========================== */
+
+      * {
         margin: 0;
-        font-family: Arial;
-        height: 100vh;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* ===========================
+         BODY
+      =========================== */
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #111;
-    }
 
-    .container {
+        overflow: hidden;
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+         FUNDO
+      =========================== */
+
+      .fundo {
+        position: fixed;
+        inset: 0;
+
+        background-image: url("/frontend/Imagens/fundo.login.jpeg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        z-index: -2;
+      }
+
+      .fundo::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+         PAINEL
+      =========================== */
+
+      .painel {
+        padding: 40px;
+
+        background: white;
+
+        border-radius: 20px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+         CONTAINER
+      =========================== */
+
+      .container {
         display: flex;
+
         align-items: center;
-        gap: 30px;
-    }
 
-    .logo img {
-        width: 180px;
-    }
+        gap: 40px;
+      }
 
-    .box {
-        background: #1c1c1c;
-        padding: 25px;
-        border-radius: 10px;
-        width: 320px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        color: white;
-    }
+      /* ===========================
+         LOGO
+      =========================== */
 
-    h2 {
+      .logo img {
+        width: 230px;
+
+        filter: drop-shadow(
+          0 0 15px rgba(139, 0, 0, 0.35)
+        );
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+         CAIXA
+      =========================== */
+
+      .box {
+        width: 380px;
+
+        padding: 35px;
+
+        background: white;
+
+        border-radius: 20px;
+
+        color: #222;
+
+        transition: 0.3s;
+      }
+
+      /* ===========================
+         TÍTULO
+      =========================== */
+
+      h2 {
         text-align: center;
-        color: #660000;
-        margin-bottom: 15px;
-    }
 
-    input {
+        color: #8b0000;
+
+        font-size: 30px;
+
+        margin-bottom: 25px;
+      }
+
+      /* ===========================
+         INPUTS
+      =========================== */
+
+      input {
         width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 5px;
+
+        padding: 14px;
+
+        margin-bottom: 18px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 10px;
+
+        background: white;
+
+        color: #222;
+
+        font-size: 15px;
+
         outline: none;
-    }
 
-   button {
-    width: 150px;
-    height: 40px;
-    padding: 0;
-    background: #660000;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+        transition: 0.3s;
+      }
 
-    box-sizing: border-box; /* impede mudança por borda/padding */
-    display: block;
-    margin: 10px auto 0 auto;
+      input::placeholder {
+        color: #888;
+      }
 
-    flex-shrink: 0; /* evita o flex alterar tamanho (caso esteja em flex) */
-}
+      input:focus {
+        border-color: #8b0000;
 
-/* evita mudança no hover */
-button:hover {
-    background: #660000; /* mantém igual */
-}
+        box-shadow:
+          0 0 10px rgba(139, 0, 0, 0.25);
+      }
 
-    button:hover {
-        background: #880000;
-    }
+      /* ===========================
+         BOTÃO
+      =========================== */
 
-    .msg {
+      button:not(.tema-btn) {
+        width: 100%;
+
+        padding: 14px;
+
+        height: auto;
+
+        margin-top: 5px;
+
+        background: #8b0000;
+
+        color: white;
+
+        border: none;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      button:not(.tema-btn):hover {
+        background: #600000;
+
+        transform: translateY(-2px);
+      }
+
+      /* ===========================
+         BOTÃO TEMA
+      =========================== */
+
+      .tema-btn {
+        position: fixed;
+
+        bottom: 25px;
+        right: 25px;
+
+        width: 55px;
+        height: 55px;
+
+        border-radius: 50%;
+
+        background: #660000;
+
+        border: none;
+
+        color: white;
+
+        font-size: 22px;
+
+        cursor: pointer;
+
+        box-shadow:
+          0 5px 15px rgba(0, 0, 0, 0.4);
+
+        transition: 0.3s;
+      }
+
+      .tema-btn:hover {
+        background: #990000;
+
+        transform: scale(1.05);
+      }
+
+      /* ===========================
+         LINK
+      =========================== */
+
+      .cadastro-link {
         text-align: center;
-        margin-top: 10px;
+
+        margin-top: 22px;
+
+        color: #555;
+
         font-size: 14px;
-    }
+      }
 
-    @media (max-width: 700px) {
-        .container {
-            flex-direction: column;
+      .cadastro-link a {
+        color: #8b0000;
+
+        text-decoration: none;
+
+        font-weight: 600;
+      }
+
+      /* ===========================
+         MENSAGEM
+      =========================== */
+
+      .msg {
+        text-align: center;
+
+        margin-top: 15px;
+
+        font-size: 14px;
+      }
+
+      /* ===========================
+         MODO CLARO
+      =========================== */
+
+      html.light .fundo,
+      body.light .fundo {
+        background-image:
+          linear-gradient(
+            rgba(255, 255, 255, 0.15),
+            rgba(255, 255, 255, 0.15)
+          ),
+          url("/frontend/Imagens/fundo.login.jpeg");
+
+        background-size: cover;
+
+        background-position: center;
+
+        background-repeat: no-repeat;
+      }
+
+      html.light .fundo::before,
+      body.light .fundo::before {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      html.light .painel,
+      body.light .painel {
+        background: #222;
+
+        color: white;
+
+        box-shadow:
+          0 15px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      html.light .box,
+      body.light .box {
+        background: #222;
+
+        color: white;
+
+        box-shadow: none;
+      }
+
+      html.light h2,
+      body.light h2 {
+        color: #ff3333;
+      }
+
+      html.light input,
+      body.light input {
+        background: #333;
+
+        color: white;
+
+        border: 1px solid #666;
+      }
+
+      html.light input::placeholder,
+      body.light input::placeholder {
+        color: #bbb;
+      }
+
+      html.light input:focus,
+      body.light input:focus {
+        border-color: #8b0000;
+
+        box-shadow:
+          0 0 10px rgba(139, 0, 0, 0.25);
+      }
+
+      html.light button:not(.tema-btn),
+      body.light button:not(.tema-btn) {
+        background: #8b0000;
+      }
+
+      html.light button:not(.tema-btn):hover,
+      body.light button:not(.tema-btn):hover {
+        background: #600000;
+      }
+
+      html.light .cadastro-link,
+      body.light .cadastro-link {
+        color: #ddd;
+      }
+
+      html.light .cadastro-link a,
+      body.light .cadastro-link a {
+        color: #ff3333;
+      }
+
+      /* ===========================
+         AUTOCOMPLETE
+      =========================== */
+
+      html.light input:-webkit-autofill,
+      body.light input:-webkit-autofill,
+      html.light input:-webkit-autofill:hover,
+      body.light input:-webkit-autofill:hover,
+      html.light input:-webkit-autofill:focus,
+      body.light input:-webkit-autofill:focus {
+        -webkit-text-fill-color: white;
+
+        box-shadow:
+          0 0 0px 1000px #333 inset;
+
+        transition:
+          background-color 9999s ease-in-out 0s;
+      }
+
+      /* ===========================
+         ANIMAÇÃO
+      =========================== */
+
+      @keyframes aparecer {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
         }
-    }
-</style>
-</head>
 
-<body>
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-<div class="container">
+      .painel {
+        animation: aparecer 0.5s ease;
+      }
 
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="1.png" alt="Logo">
+      /* ===========================
+         RESPONSIVO
+      =========================== */
+
+      @media (max-width: 800px) {
+        body {
+          overflow-y: auto;
+        }
+
+        .painel {
+          width: 95%;
+          padding: 25px;
+        }
+
+        .container {
+          flex-direction: column;
+          gap: 25px;
+        }
+
+        .logo img {
+          width: 150px;
+        }
+
+        .box {
+          width: 100%;
+          padding: 25px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .painel {
+          width: 95%;
+          padding: 20px;
+        }
+
+        .box {
+          padding: 20px;
+        }
+
+        h2 {
+          font-size: 26px;
+        }
+
+        .logo img {
+          width: 130px;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (
+          document.documentElement.classList.contains("light")
+        ) {
+          document.body.classList.add("light");
+        } else {
+          document.body.classList.remove("light");
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <div class="fundo"></div>
+
+    <button
+      class="tema-btn"
+      onclick="alternarTema()"
+      id="temaBtn"
+      type="button"
+    >
+      ☀️
+    </button>
+
+    <div class="painel">
+
+      <div class="container">
+
+        <div class="logo">
+          <img
+            src="/frontend/Imagens/1.png"
+            alt="Logo"
+          />
+        </div>
+
+        <div class="box">
+
+          <h2>Login</h2>
+
+          <input
+            type="text"
+            id="user"
+            placeholder="E-mail"
+          />
+
+          <input
+            type="password"
+            id="pass"
+            placeholder="Senha"
+          />
+
+          <button onclick="login()">
+            Entrar
+          </button>
+
+          <p class="cadastro-link">
+            Não tem uma conta?
+
+            <a href="user/cadastro.html">
+              Criar conta
+            </a>
+          </p>
+
+          <div
+            class="msg"
+            id="msg"
+          ></div>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- LOGIN -->
-    <div class="box">
-        <h2>Login</h2>
+    <script>
+      async function login() {
 
-        <input type="text" id="user" placeholder="Usuário">
-        <input type="password" id="pass" placeholder="Senha">
+        const user =
+          document.getElementById("user").value.trim();
 
-        <button onclick="login()">Entrar</button>
+        const pass =
+          document.getElementById("pass").value;
 
-        <p class="cadastro-link">
-    Não tem uma conta?
-    <a href="cadastro.html">Criar conta</a>
-</p>
+        const msg =
+          document.getElementById("msg");
 
-        <div class="msg" id="msg"></div>
-    </div>
+        if (!user || !pass) {
 
-</div>
+          msg.innerText =
+            "Preencha o e-mail e a senha.";
 
-<script>
+          msg.style.color = "red";
 
+          return;
+        }
 
-async function login() {
-    const user = document.getElementById("user").value;
-    const pass = document.getElementById("pass").value;
-    const msg = document.getElementById("msg");
+        try {
 
-    try {
+          const resposta = await fetch(
+            "http://localhost:3000/login",
+            {
+              method: "POST",
 
-        const resposta = await fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: {
+              headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
+              },
+
+              body: JSON.stringify({
                 email: user,
                 senha: pass
-            })
-        });
+              })
+            }
+          );
 
-        const dados = await resposta.json();
+          const dados =
+            await resposta.json();
 
-        if (resposta.ok) {
+          if (resposta.ok) {
 
-            localStorage.setItem("logado", "true");
-            localStorage.setItem("nome", dados.nome);
-            localStorage.setItem("tipo", dados.tipo);
+            const tipoUsuario =
+              String(dados.tipo || "")
+                .trim()
+                .toLowerCase();
 
-            if (dados.tipo === "adm") {
-                window.location.href = "dashboard.html";
+            const ehAdmin =
+              tipoUsuario === "adm" ||
+              tipoUsuario === "admin";
+
+            localStorage.setItem(
+              "logado",
+              "true"
+            );
+
+            localStorage.setItem(
+              "id_usuario",
+              dados.id
+            );
+
+            localStorage.setItem(
+              "nome",
+              dados.nome
+            );
+
+            localStorage.setItem(
+              "telefone",
+              dados.telefone || ""
+            );
+
+            localStorage.setItem(
+              "tipo",
+              dados.tipo
+            );
+
+            if (ehAdmin) {
+
+              window.location.href =
+                "admin/dashboard.html";
+
             } else {
-                window.location.href = "cliente.html";
+
+              window.location.href =
+                "user/cliente.html";
+
             }
 
-        } else {
+          } else {
 
-            msg.innerText = dados.erro;
+            msg.innerText =
+              dados.erro ||
+              "Email ou senha inválidos.";
+
             msg.style.color = "red";
+          }
 
+        } catch (erro) {
+
+          console.error(
+            "Erro no login:",
+            erro
+          );
+
+          msg.innerText =
+            "Erro ao conectar com o servidor.";
+
+          msg.style.color = "red";
         }
+      }
+    </script>
 
-    } catch (erro) {
+    <!-- Tema global -->
+    <script src="/frontend/js/tema.js"></script>
 
-        console.error(erro);
-
-        msg.innerText = "Erro ao conectar com o servidor.";
-        msg.style.color = "red";
-    }
-}
-
-</script>
-
-</body>
+  </body>
 </html>
