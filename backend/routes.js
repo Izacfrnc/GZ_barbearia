@@ -27,7 +27,10 @@ async function criar(req, res, tabela, campos) {
     `;
 
     const [result] = await db.query(sql, valores);
-    res.status(201).json({ mensagem: "Criado com sucesso", id: result.insertId });
+    res.status(201).json({
+      mensagem: "Criado com sucesso",
+      id: result.insertId
+    });
   } catch (error) {
     erro500(res, error);
   }
@@ -63,13 +66,16 @@ async function atualizar(req, res, tabela, idCampo, campos) {
 async function remover(req, res, tabela, idCampo, nome = "Registro") {
   try {
     const { id } = req.params;
+
     const [result] = await db.query(
       `DELETE FROM ${tabela} WHERE ${idCampo} = ?`,
       [id]
     );
 
     if (!result.affectedRows) {
-      return res.status(404).json({ erro: `${nome} não encontrado` });
+      return res.status(404).json({
+        erro: `${nome} não encontrado`
+      });
     }
 
     res.json({ mensagem: "Removido com sucesso" });
@@ -78,34 +84,77 @@ async function remover(req, res, tabela, idCampo, nome = "Registro") {
   }
 }
 
+
 /* CLIENTES */
-router.get("/clientes", (req, res) => listar(res, "clientes"));
+
+router.get("/clientes", (req, res) =>
+  listar(res, "clientes")
+);
+
 router.post("/clientes", (req, res) =>
   criar(req, res, "clientes", ["nome", "telefone"])
 );
+
 router.put("/clientes/:id", (req, res) =>
-  atualizar(req, res, "clientes", "id_clientes", ["nome", "telefone"])
-);
-router.delete("/clientes/:id", (req, res) =>
-  remover(req, res, "clientes", "id_clientes", "Cliente")
+  atualizar(
+    req,
+    res,
+    "clientes",
+    "id_clientes",
+    ["nome", "telefone"]
+  )
 );
 
+router.delete("/clientes/:id", (req, res) =>
+  remover(
+    req,
+    res,
+    "clientes",
+    "id_clientes",
+    "Cliente"
+  )
+);
+
+
 /* FUNCIONÁRIOS */
-router.get("/funcionarios", (req, res) => listar(res, "funcionarios"));
+
+router.get("/funcionarios", (req, res) =>
+  listar(res, "funcionarios")
+);
+
 router.post("/funcionarios", (req, res) =>
   criar(req, res, "funcionarios", ["nome"])
 );
+
 router.put("/funcionarios/:id", (req, res) =>
-  atualizar(req, res, "funcionarios", "id_funcionarios", ["nome"])
-);
-router.delete("/funcionarios/:id", (req, res) =>
-  remover(req, res, "funcionarios", "id_funcionarios", "Funcionário")
+  atualizar(
+    req,
+    res,
+    "funcionarios",
+    "id_funcionarios",
+    ["nome"]
+  )
 );
 
+router.delete("/funcionarios/:id", (req, res) =>
+  remover(
+    req,
+    res,
+    "funcionarios",
+    "id_funcionarios",
+    "Funcionário"
+  )
+);
+
+
 /* SERVIÇOS */
+
 router.get("/servicos", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT * FROM servico");
+    const [rows] = await db.query(
+      "SELECT * FROM servico"
+    );
+
     res.json(rows);
   } catch (error) {
     erro500(res, error);
@@ -113,16 +162,37 @@ router.get("/servicos", async (req, res) => {
 });
 
 router.post("/servicos", (req, res) =>
-  criar(req, res, "servico", ["tipo"])
-);
-router.put("/servicos/:id", (req, res) =>
-  atualizar(req, res, "servico", "id_servico", ["tipo"])
-);
-router.delete("/servicos/:id", (req, res) =>
-  remover(req, res, "servico", "id_servico", "Serviço")
+  criar(
+    req,
+    res,
+    "servico",
+    ["tipo", "imagem", "preco"]
+  )
 );
 
+router.put("/servicos/:id", (req, res) =>
+  atualizar(
+    req,
+    res,
+    "servico",
+    "id_servico",
+    ["tipo", "imagem", "preco"]
+  )
+);
+
+router.delete("/servicos/:id", (req, res) =>
+  remover(
+    req,
+    res,
+    "servico",
+    "id_servico",
+    "Serviço"
+  )
+);
+
+
 /* AGENDAMENTOS */
+
 router.get("/agendamentos", async (req, res) => {
   try {
     const [rows] = await db.query(`
@@ -152,18 +222,22 @@ router.get("/agendamentos", async (req, res) => {
   }
 });
 
+
 router.get("/disponibilidade", async (req, res) => {
   try {
     const { data, funcionarioId } = req.query;
 
     if (!data || !funcionarioId) {
-      return res.status(400).json({ erro: "Informe data e funcionarioId" });
+      return res.status(400).json({
+        erro: "Informe data e funcionarioId"
+      });
     }
 
     const [rows] = await db.query(`
       SELECT horario
       FROM agendamentos
-      WHERE data = ? AND funcionarios_id_funcionarios = ?
+      WHERE data = ?
+        AND funcionarios_id_funcionarios = ?
       ORDER BY horario
     `, [data, funcionarioId]);
 
@@ -172,6 +246,7 @@ router.get("/disponibilidade", async (req, res) => {
     erro500(res, error);
   }
 });
+
 
 router.post("/agendamentos", async (req, res) => {
   try {
@@ -190,14 +265,22 @@ router.post("/agendamentos", async (req, res) => {
       !servico_id_servico ||
       !funcionarios_id_funcionarios
     ) {
-      return res.status(400).json({ erro: "Preencha todos os campos" });
+      return res.status(400).json({
+        erro: "Preencha todos os campos"
+      });
     }
 
     const [existe] = await db.query(`
       SELECT id_agendamentos
       FROM agendamentos
-      WHERE data = ? AND horario = ? AND funcionarios_id_funcionarios = ?
-    `, [data, horario, funcionarios_id_funcionarios]);
+      WHERE data = ?
+        AND horario = ?
+        AND funcionarios_id_funcionarios = ?
+    `, [
+      data,
+      horario,
+      funcionarios_id_funcionarios
+    ]);
 
     if (existe.length) {
       return res.status(409).json({
@@ -207,7 +290,13 @@ router.post("/agendamentos", async (req, res) => {
 
     const [result] = await db.query(`
       INSERT INTO agendamentos
-      (data, horario, clientes_id_clientes, servico_id_servico, funcionarios_id_funcionarios)
+      (
+        data,
+        horario,
+        clientes_id_clientes,
+        servico_id_servico,
+        funcionarios_id_funcionarios
+      )
       VALUES (?, ?, ?, ?, ?)
     `, [
       data,
@@ -221,14 +310,17 @@ router.post("/agendamentos", async (req, res) => {
       mensagem: "Agendamento criado com sucesso",
       id_agendamentos: result.insertId
     });
+
   } catch (error) {
     erro500(res, error);
   }
 });
 
+
 router.put("/agendamentos/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
     const {
       data,
       horario,
@@ -244,7 +336,9 @@ router.put("/agendamentos/:id", async (req, res) => {
       !servico_id_servico ||
       !funcionarios_id_funcionarios
     ) {
-      return res.status(400).json({ erro: "Preencha todos os campos" });
+      return res.status(400).json({
+        erro: "Preencha todos os campos"
+      });
     }
 
     const [existe] = await db.query(`
@@ -254,7 +348,12 @@ router.put("/agendamentos/:id", async (req, res) => {
         AND horario = ?
         AND funcionarios_id_funcionarios = ?
         AND id_agendamentos <> ?
-    `, [data, horario, funcionarios_id_funcionarios, id]);
+    `, [
+      data,
+      horario,
+      funcionarios_id_funcionarios,
+      id
+    ]);
 
     if (existe.length) {
       return res.status(409).json({
@@ -281,14 +380,20 @@ router.put("/agendamentos/:id", async (req, res) => {
     ]);
 
     if (!result.affectedRows) {
-      return res.status(404).json({ erro: "Agendamento não encontrado" });
+      return res.status(404).json({
+        erro: "Agendamento não encontrado"
+      });
     }
 
-    res.json({ mensagem: "Agendamento atualizado com sucesso" });
+    res.json({
+      mensagem: "Agendamento atualizado com sucesso"
+    });
+
   } catch (error) {
     erro500(res, error);
   }
 });
+
 
 router.delete("/agendamentos/:id", async (req, res) => {
   try {
@@ -300,21 +405,25 @@ router.delete("/agendamentos/:id", async (req, res) => {
     );
 
     if (!result.affectedRows) {
-      return res.status(404).json({ erro: "Agendamento não encontrado" });
+      return res.status(404).json({
+        erro: "Agendamento não encontrado"
+      });
     }
 
-    res.json({ mensagem: "Agendamento removido com sucesso" });
+    res.json({
+      mensagem: "Agendamento removido com sucesso"
+    });
+
   } catch (error) {
     erro500(res, error);
   }
 });
 
+
 /* CADASTRO DE USUÁRIO */
 
 router.post("/cadastro", async (req, res) => {
-
   try {
-
     const {
       nome,
       email,
@@ -322,19 +431,16 @@ router.post("/cadastro", async (req, res) => {
       senha
     } = req.body;
 
-
     if (!nome || !email || !telefone || !senha) {
       return res.status(400).json({
         erro: "Preencha todos os campos"
       });
     }
 
-
     const [existe] = await db.query(
       "SELECT * FROM usuarios WHERE email = ?",
       [email]
     );
-
 
     if (existe.length > 0) {
       return res.status(409).json({
@@ -342,8 +448,7 @@ router.post("/cadastro", async (req, res) => {
       });
     }
 
-
-    await db.query(
+    const [resultado] = await db.query(
       `INSERT INTO usuarios
       (nome, email, telefone, senha, tipo)
       VALUES (?, ?, ?, ?, ?)`,
@@ -356,29 +461,40 @@ router.post("/cadastro", async (req, res) => {
       ]
     );
 
+    await db.query(
+      `INSERT INTO clientes
+      (nome, telefone)
+      VALUES (?, ?)`,
+      [
+        nome,
+        telefone
+      ]
+    );
 
     res.json({
-      mensagem: "Cadastro realizado com sucesso"
+      mensagem: "Cadastro realizado com sucesso",
+      id_usuario: resultado.insertId
     });
 
-
-  } catch(error){
+  } catch (error) {
+    console.error("Erro no cadastro:", error);
 
     res.status(500).json({
-      erro:error.message
+      erro: error.message
     });
-
   }
-
 });
 
+
+/* LOGIN */
 
 router.post("/login", async (req, res) => {
   try {
     const { email, senha } = req.body;
 
     const [usuarios] = await db.query(
-      `SELECT * FROM usuarios
+      `SELECT id_usuario, nome, telefone, tipo
+       FROM usuarios
        WHERE email = ? AND senha = ?`,
       [email, senha]
     );
@@ -392,29 +508,63 @@ router.post("/login", async (req, res) => {
     const usuario = usuarios[0];
 
     res.json({
+      id: usuario.id_usuario,
       nome: usuario.nome,
+      telefone: usuario.telefone,
       tipo: usuario.tipo
     });
 
   } catch (error) {
+    console.error("Erro no login:", error);
+
     res.status(500).json({
-      erro: error.message
+      erro: "Erro interno do servidor"
     });
   }
 });
 
-router.post("/login", async (req, res) => {
 
-   // código do login
+/* CLIENTE LOGADO */
 
+router.get("/cliente-logado", async (req, res) => {
+  try {
+    const { nome, telefone } = req.query;
+
+    if (!nome || !telefone) {
+      return res.status(400).json({
+        erro: "Nome e telefone não informados"
+      });
+    }
+
+    const [clientes] = await db.query(
+      `SELECT id_clientes, nome, telefone
+       FROM clientes
+       WHERE nome = ? AND telefone = ?
+       LIMIT 1`,
+      [nome, telefone]
+    );
+
+    if (clientes.length === 0) {
+      return res.status(404).json({
+        erro: "Cliente não encontrado"
+      });
+    }
+
+    res.json(clientes[0]);
+
+  } catch (error) {
+    console.error(
+      "Erro ao buscar cliente logado:",
+      error
+    );
+
+    res.status(500).json({
+      erro: "Erro ao buscar cliente"
+    });
+  }
 });
 
 
-router.post("/cadastro", async (req, res) => {
-
-   // código do cadastro
-
-});
-
+/* EXPORTA O ROUTER */
 
 module.exports = router;
