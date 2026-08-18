@@ -76,7 +76,6 @@
 
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 
-
         transition: 0.3s;
       }
 
@@ -353,6 +352,8 @@
         type="tel"
         id="telefone"
         placeholder="Telefone"
+        maxlength="15"
+        required
       />
 
       <input
@@ -421,6 +422,39 @@
       aplicarTema();
 
       // ======================
+      // FORMATAÇÃO DO TELEFONE
+      // ======================
+
+      const campoTelefone = document.getElementById("telefone");
+
+      campoTelefone.addEventListener("input", function () {
+        let telefone = campoTelefone.value.replace(/\D/g, "");
+
+        if (telefone.length > 11) {
+          telefone = telefone.substring(0, 11);
+        }
+
+        if (telefone.length > 6) {
+          telefone = telefone.replace(
+            /^(\d{2})(\d{5})(\d{0,4}).*/,
+            "($1) $2-$3"
+          );
+        } else if (telefone.length > 2) {
+          telefone = telefone.replace(
+            /^(\d{2})(\d{0,5})/,
+            "($1) $2"
+          );
+        } else if (telefone.length > 0) {
+          telefone = telefone.replace(
+            /^(\d{0,2})/,
+            "($1"
+          );
+        }
+
+        campoTelefone.value = telefone;
+      });
+
+      // ======================
       // CADASTRO
       // ======================
 
@@ -433,7 +467,8 @@
 
         const senha = document.getElementById("senha").value;
 
-        const confirmarSenha = document.getElementById("confirmarSenha").value;
+        const confirmarSenha =
+          document.getElementById("confirmarSenha").value;
 
         if (!nome || !email || !telefone || !senha || !confirmarSenha) {
           alert("Preencha todos os campos!");
@@ -448,23 +483,26 @@
         }
 
         try {
-          const resposta = await fetch("http://localhost:3000/cadastro", {
-            method: "POST",
+          const resposta = await fetch(
+            "http://localhost:3000/cadastro",
+            {
+              method: "POST",
 
-            headers: {
-              "Content-Type": "application/json",
-            },
+              headers: {
+                "Content-Type": "application/json",
+              },
 
-            body: JSON.stringify({
-              nome: nome,
+              body: JSON.stringify({
+                nome: nome,
 
-              email: email,
+                email: email,
 
-              telefone: telefone,
+                telefone: telefone,
 
-              senha: senha,
-            }),
-          });
+                senha: senha,
+              }),
+            }
+          );
 
           const dados = await resposta.json();
 
@@ -482,10 +520,25 @@
         }
       }
 
+      // Clique no botão "Criar Conta"
       document
         .getElementById("btnCadastrar")
         .addEventListener("click", cadastrar);
+
+      // ======================
+      // ENTER PARA CADASTRAR
+      // ======================
+
+      document.addEventListener("keydown", function (event) {
+        if (
+          event.key === "Enter" &&
+          event.target.tagName === "INPUT"
+        ) {
+          event.preventDefault();
+
+          cadastrar();
+        }
+      });
     </script>
   </body>
 </html>
-
